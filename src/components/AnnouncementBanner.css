@@ -1,0 +1,36 @@
+.announcement-banner {
+  /* background: linear-gradient(90deg, #FF69B4, #FF1493, #FF69B4); */
+  background: #ff1493;
+  color: white;
+  /* padding: 12px 0; */
+  overflow: hidden;
+  position: relative;
+  font-weight: 100;
+  font-size: 14px;
+}
+
+.announcement-content {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 30s linear infinite;
+}
+
+.announcement-content span {
+  padding-right: 100px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+@media (max-width: 768px) {
+  .announcement-banner {
+    font-size: 12px;
+    padding: 10px 0;
+  }
+}
