@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
 import Support from './pages/Support';
+import DeleteAccount from './pages/DeleteAccount';
 import { Toaster } from './components/ui/toaster';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/delete-account" element={<DeleteAccount />} />
         </Routes>
         <Toaster />
       </div>

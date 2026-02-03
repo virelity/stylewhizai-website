@@ -99,6 +99,7 @@ const Footer = () => {
             <ul>
               <li><a href="#faq">FAQ</a></li>
               <li><Link to="/support">Support Center</Link></li>
+              <li><Link to="/delete-account">Delete Account</Link></li>
             </ul>
           </div>
 
@@ -125,6 +126,8 @@ const Footer = () => {
             <Link to="/terms">Terms</Link>
             <span className="separator">|</span>
             <Link to="/support">Support</Link>
+            <span className="separator">|</span>
+            <Link to="/delete-account">Delete Account</Link>
           </div>
         </div>
       </div>

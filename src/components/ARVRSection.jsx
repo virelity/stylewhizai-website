@@ -13,8 +13,8 @@ const ARVRSection = () => {
           </div>
           <h2 className="section-title">An Advanced AR/AI Smart Service</h2>
           <p className="section-description">
-            Our platform utilizes cutting-edge augmented reality (AR) 
-            technologies to suggest personalized styles to users based on their preferences, 
+            Our platform utilizes cutting-edge augmented reality (AR)
+            technologies to suggest personalized styles to users based on their preferences,
             body type, and fashion trends.
           </p>
           <div className="feature-grid">
@@ -40,7 +40,6 @@ const ARVRSection = () => {
               <p>Tailored suggestions based on your unique style and preferences</p>
             </div>
           </div>
-          <Button className="learn-more-btn">Learn More</Button>
         </div>
       </div>
     </section>

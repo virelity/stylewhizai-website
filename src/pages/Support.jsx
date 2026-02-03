@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { Link } from "react-router-dom";
 import { Mail, Clock, HelpCircle, CreditCard, Camera, Trash2 } from "lucide-react";
 import "./LegalPages.css";
 
@@ -46,6 +47,7 @@ const Support = () => {
                             <Trash2 className="support-icon" size={32} />
                             <h3>Data Deletion</h3>
                             <p>Manage your privacy. Request full deletion of your account and personal data.</p>
+                            <Link to="/delete-account" className="card-link">Learn How &rarr;</Link>
                         </div>
                     </div>
                 </div>
