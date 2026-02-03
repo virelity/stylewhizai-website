@@ -8,7 +8,7 @@ import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
 import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
 import "./HeroSection.css";
 
-const HeroSection = ({onDownloadClick}) => {
+const HeroSection = ({ onDownloadClick }) => {
   const canvasRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,18 +34,20 @@ const HeroSection = ({onDownloadClick}) => {
     }
 
     function init() {
+      if (!canvas) return;
+
       scene = new THREE.Scene();
 
       camera = new THREE.PerspectiveCamera(
         50,
-        window.innerWidth / window.innerHeight,
+        canvas.clientWidth / canvas.clientHeight,
         0.5,
         1000
       );
-      camera.position.set(2.1025, 4, 7.35); //(2.1025, 4, 6.35);
+      camera.position.set(2.1025, 4, 7.35);
 
       if (window.innerWidth < 560) {
-        camera.position.set(2.1025, 1, 4.5); //(2.1025, 4, 6.35);
+        camera.position.set(2.1025, 1, 4.5);
       }
 
       renderer = new THREE.WebGLRenderer({
@@ -58,7 +60,7 @@ const HeroSection = ({onDownloadClick}) => {
 
       window.addEventListener("resize", onWindowResize);
 
-      if (deviceType === "touch") {
+      if (deviceType === "touch" && renderer.domElement) {
         controls = new OrbitControls(camera, renderer.domElement);
         controls.target = new THREE.Vector3(2.103, 4.887, 0.396);
         controls.enablePan = false;
@@ -74,7 +76,6 @@ const HeroSection = ({onDownloadClick}) => {
 
       RectAreaLightUniformsLib.init();
 
-      // Load HDR environment map
       new RGBELoader().load(
         "/assets/3dmodels/odyssey_0_5K_6e3c37df-221e-49b9-8447-39a50559d19e.hdr",
         function (texture) {
@@ -83,7 +84,6 @@ const HeroSection = ({onDownloadClick}) => {
         }
       );
 
-      // ✅ Load 3D model with loading manager
       const manager = new THREE.LoadingManager();
       manager.onStart = () => setIsLoading(true);
       manager.onLoad = () => setIsLoading(false);
@@ -98,16 +98,12 @@ const HeroSection = ({onDownloadClick}) => {
           maniquine = gltf.scene.getObjectByName("body002");
           phone = gltf.scene.getObjectByName("MobilePhone");
         },
-        (xhr) => {
-          // optional: progress percentage
-          // console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-        },
+        undefined,
         (error) => {
           console.error("Error loading GLB:", error);
         }
       );
 
-      // Lighting
       const rectLight1 = new THREE.RectAreaLight(0xfcba03, 3, 20, 20);
       rectLight1.position.set(-5.257, 10.799, -5.653);
       rectLight1.rotation.set(0, Math.PI, 0);
@@ -127,17 +123,7 @@ const HeroSection = ({onDownloadClick}) => {
     }
 
     function onWindowResize() {
-      // canvas.width =
-      //   window.innerWidth < 650
-      //     ? window.innerWidth * 1
-      //     : window.innerWidth < 992
-      //     ? window.innerWidth * 0.5
-      //     : window.innerWidth < 1350
-      //     ? window.innerWidth * 0.4
-      //     : window.innerWidth < 1450
-      //     ? window.innerWidth * 0.36
-      //     : window.innerWidth * 0.33;
-      // canvas.height = window.innerHeight / 1.25;
+      if (!canvasRef.current || !renderer || !camera) return;
 
       camera.aspect =
         canvasRef.current.clientWidth / canvasRef.current.clientHeight;
@@ -146,19 +132,16 @@ const HeroSection = ({onDownloadClick}) => {
         canvasRef.current.clientHeight
       );
 
-      // console.log(camera.aspect);
-      // console.log(canvasRef.current.clientWidth);
-      // console.log(canvasRef.current.clientHeight);
-
       camera.updateProjectionMatrix();
     }
 
     function onMouseMove(e) {
+      if (!canvas) return;
       mouseIn = true;
 
       var offsets = canvas.getBoundingClientRect();
-      mousePosition.x = ((e.clientX - offsets.left) / canvas.width) * 2 - 1;
-      mousePosition.y = -((e.clientY - offsets.top) / canvas.height) * 2 + 1;
+      mousePosition.x = ((e.clientX - offsets.left) / canvas.clientWidth) * 2 - 1;
+      mousePosition.y = -((e.clientY - offsets.top) / canvas.clientHeight) * 2 + 1;
 
       raycaster.setFromCamera(mousePosition, camera);
       raycaster.ray.intersectPlane(plane, intersectionPoint);
@@ -171,27 +154,34 @@ const HeroSection = ({onDownloadClick}) => {
 
     function onMouseLeave() {
       mouseIn = false;
-      if (parent) parent.lookAt(camera.position);
+      if (parent && camera) parent.lookAt(camera.position);
     }
 
     var clock = new THREE.Clock();
     function animate() {
+      if (!canvasRef.current || !renderer) return;
+
       if (deviceType === "non-touch" && parent != null && mouseIn)
         parent.lookAt(target.position);
-      if (deviceType === "touch") {
+      if (deviceType === "touch" && controls) {
         controls.update(clock.getDelta());
       }
       renderer.render(scene, camera);
-      onWindowResize();
+
+      // Removed onWindowResize from animate to prevent excessive calls and potential issues
     }
 
     init();
 
     return () => {
       window.removeEventListener("resize", onWindowResize);
-      if (deviceType === "non-touch") {
+      if (deviceType === "non-touch" && canvas) {
         canvas.removeEventListener("mousemove", onMouseMove);
         canvas.removeEventListener("mouseleave", onMouseLeave);
+      }
+      if (renderer) {
+        renderer.setAnimationLoop(null);
+        renderer.dispose();
       }
     };
   }, []);
@@ -210,32 +200,25 @@ const HeroSection = ({onDownloadClick}) => {
             style — all in one seamless app experience.
           </p>
           <div className="hero-buttons">
-            <Button className="primary-hero-btn" onClick={onDownloadClick}>
-              Explore the App <ArrowRight size={20} />
-            </Button>
-            <Button variant="outline" className="secondary-hero-btn">
-              Start Styling Now
-            </Button>
+            <div className="hero-coming-soon">
+              Coming Soon to Play Store & App Store
+            </div>
+            <p className="hero-launch-date">Launching February 5, 2026</p>
           </div>
         </div>
 
-        {/* <div className="hero-image"> */}
-        <>
-          <canvas
-            id="hero-canvas"
-            className="hero-canvas"
-            ref={canvasRef}
-          ></canvas>
+        <canvas
+          id="hero-canvas"
+          className="hero-canvas"
+          ref={canvasRef}
+        ></canvas>
 
-          {/* ✅ Loader overlay */}
-          {isLoading && (
-            <div className="canvas-loader">
-              <div className="spinner"></div>
-              <p>Loading 3D model...</p>
-            </div>
-          )}
-        </>
-        {/* </div> */}
+        {isLoading && (
+          <div className="canvas-loader">
+            <div className="spinner"></div>
+            <p>Loading 3D model...</p>
+          </div>
+        )}
       </div>
     </section>
   );

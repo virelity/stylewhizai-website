@@ -14,7 +14,7 @@ const Footer = () => {
   const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     setIsSubscribing(true);
-    
+
     try {
       const response = await fetch('https://stylewhizai.net/api/newsletter/subscribe', {
         method: 'POST',
@@ -60,15 +60,12 @@ const Footer = () => {
               <h2>StyleWhizAI</h2>
             </div>
             <p className="footer-description">
-              StyleWhizAI is an advanced AR/AI smart service platform that transforms 
+              StyleWhizAI is an advanced AR/AI smart service platform that transforms
               your fashion experience with personalized AI styling and virtual try-on technology.
             </p>
             <div className="social-links">
               <a href="https://www.facebook.com/stylewhizai" target="_blank" className="social-link" aria-label="Facebook">
                 <Facebook size={20} />
-              </a>
-              <a href="#" className="social-link" aria-label="Twitter">
-                <Twitter size={20} />
               </a>
               <a href="https://www.instagram.com/stylewhizai/#" target="_blank" className="social-link" aria-label="Instagram">
                 <Instagram size={20} />
@@ -85,8 +82,6 @@ const Footer = () => {
             <ul>
               <li><a href="#ai-assistance">AI Styling</a></li>
               <li><a href="#virtual-tryon">Virtual Try-On</a></li>
-              <li><a href="#">Smart Wardrobe</a></li>
-              <li><a href="#">Body Type Analysis</a></li>
             </ul>
           </div>
 
@@ -94,10 +89,7 @@ const Footer = () => {
           <div className="footer-column">
             <h3>About Us</h3>
             <ul>
-              <li><a href="#profile">Our Story</a></li>
-              <li><a href="#profile">Team</a></li>
-              <li><a href="#profile">Careers</a></li>
-              <li><a href="#profile">Press</a></li>
+              <li><a href="#about">Our Story</a></li>
             </ul>
           </div>
 
@@ -106,10 +98,7 @@ const Footer = () => {
             <h3>Resources</h3>
             <ul>
               <li><a href="#faq">FAQ</a></li>
-              <li><a href="#blog">Blogs</a></li>
-              <li><a href="#knowledge">Knowledge Base</a></li>
-              <li><a href="#events">Events & Workshop</a></li>
-              <li><a href="#downloads">Downloads</a></li>
+              <li><Link to="/support">Support Center</Link></li>
             </ul>
           </div>
 
@@ -117,58 +106,25 @@ const Footer = () => {
           <div className="footer-column">
             <h3>Contact Us</h3>
             <ul>
-              <li><a href="mailto:info@stylewhizai.net">omaima.rh@gmail.com</a></li>
-              <li><a href="tel:+971566967720">+971 56 696 7720</a></li>
-              <li><a href="#">Support Center</a></li>
-              <li><a href="#">FAQ</a></li>
+              <li><a href="mailto:stylewhizai@gmail.com">stylewhizai@gmail.com</a></li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div className="footer-column newsletter-column">
-            <h3>Newsletter</h3>
-            <p>Stay inspired with the latest trends and AI fashion insights.</p>
-            <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
-              <div className="newsletter-input-group">
-                <Mail size={20} className="mail-icon" />
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="newsletter-input"
-                />
-              </div>
-              <Button 
-                type="submit" 
-                className="newsletter-btn"
-                disabled={isSubscribing}
-              >
-                {isSubscribing ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Subscribing...
-                  </>
-                ) : (
-                  <>
-                    Sign Up <ArrowRight size={16} />
-                  </>
-                )}
-              </Button>
-            </form>
-          </div>
+
         </div>
       </div>
 
       {/* Sub Footer */}
       <div className="sub-footer">
         <div className="sub-footer-content">
-          <p>&copy; 2024 - 2025 StyleWhizAI. All Rights Reserved.</p>
+          <p>&copy; 2026 StyleWhizAI. All Rights Reserved.</p>
           <div className="footer-links">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
+            <Link to="/privacy-policy">Privacy Policy</Link>
+            <span className="separator">|</span>
+            <Link to="/terms">Terms</Link>
+            <span className="separator">|</span>
+            <Link to="/support">Support</Link>
           </div>
         </div>
       </div>

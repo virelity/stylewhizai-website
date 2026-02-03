@@ -314,6 +314,54 @@
   transform: none;
 }
 
+.coming-soon-modal-content {
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.coming-soon-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.coming-soon-text {
+  font-size: 18px;
+  line-height: 1.5;
+  color: white;
+}
+
+.coming-soon-text strong {
+  color: #ff69b4;
+}
+
+.coming-soon-subtext {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 10px;
+}
+
+.close-modal-btn {
+  background: linear-gradient(134deg, #ff69b4 0%, #ff1493 100%);
+  border: none;
+  color: white;
+  padding: 12px 40px;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+}
+
+.close-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
 /* Modal Responsive Styles */
 @media (max-width: 768px) {
   .registration-modal {

@@ -1,8 +1,8 @@
 import './AnnouncementBanner.css';
 
 const AnnouncementBanner = () => {
-  const text = 'Discover the Future of Fashion – StyleWhiz App Coming Soon | Personalized AI Styling | Virtual Try-On with AR Mirror | Sign Up for Early Access Today';
-  
+  const text = 'StyleWhiz App Launching February 5, 2026! | Personalized AI Styling | Virtual Try-On with AR Mirror | Coming Soon to Play Store & App Store';
+
   return (
     <div className="announcement-banner">
       <div className="announcement-content">

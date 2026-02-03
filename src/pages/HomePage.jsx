@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import AnnouncementBanner from "../components/AnnouncementBanner";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
@@ -9,7 +10,6 @@ import MobileAppSection from "../components/MobileAppSection";
 import FutureCarousel from "../components/FutureCarousel";
 import FAQSection from "../components/FAQSection";
 import ServicesSection from "../components/ServicesSection";
-import BlogSection from "../components/BlogSection";
 import CTASection from "../components/CTASection";
 import Footer from "../components/Footer";
 
@@ -17,14 +17,7 @@ const HomePage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("stylewhizai_token");
-  //   if (token) {
-  //     setUserToken(token);
-  //     setIsAuthenticated(true);
-  //   }
-  // }, []);
+  const location = useLocation();
 
   const checkToken = () => {
     const token = localStorage.getItem("stylewhizai_token");
@@ -48,6 +41,20 @@ const HomePage = () => {
       window.removeEventListener("storage", checkToken);
     };
   }, []);
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const id = location.state.scrollTo;
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+        // Clear state so it doesn't scroll again on re-render
+        window.history.replaceState({}, document.title);
+      }
+    }
+  }, [location]);
 
   const handleDownloadClick = async () => {
     const token = localStorage.getItem("stylewhizai_token");
@@ -93,7 +100,6 @@ const HomePage = () => {
       <FutureCarousel />
       <FAQSection />
       <ServicesSection />
-      <BlogSection />
       <CTASection />
       <Footer />
     </div>

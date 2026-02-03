@@ -14,20 +14,20 @@
   right: -20%;
   width: 800px;
   height: 800px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 105, 180, 0.15) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(255, 105, 180, 0.15) 0%,
+      transparent 70%);
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-30px);
   }
@@ -54,6 +54,7 @@
     opacity: 0;
     transform: translateX(-50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -88,45 +89,26 @@
   flex-wrap: wrap;
 }
 
-.primary-hero-btn {
+.hero-coming-soon {
   background: linear-gradient(135deg, #ff69b4, #ff1493);
   color: white;
-  padding: 16px 32px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 30px;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.primary-hero-btn:hover {
-  transform: translateY(-3px);
+  padding: 16px 40px;
+  font-size: 20px;
+  font-weight: 800;
+  border-radius: 50px;
   box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.secondary-hero-btn {
-  background: transparent;
-  color: white;
-  padding: 16px 32px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 30px;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  /* m */
-  display: none;
-  /* m */
+.hero-launch-date {
+  font-size: 18px !important;
+  color: #ff69b4 !important;
+  font-weight: 700 !important;
+  margin-top: 10px;
+  width: 100%;
 }
 
-.secondary-hero-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: white;
-}
 
 .hero-image {
   display: flex;
@@ -142,6 +124,7 @@
     opacity: 0;
     transform: translateX(50px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -160,10 +143,12 @@
 }
 
 @keyframes floatCanvas {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(1deg);
   }
@@ -178,7 +163,8 @@
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
   position: relative;
   animation: floatPhone 3s ease-in-out infinite;
-  display: none; /* Hide phone mockup when canvas is active */
+  display: none;
+  /* Hide phone mockup when canvas is active */
 }
 
 .hero-image {
@@ -214,10 +200,12 @@
 }
 
 @keyframes floatPhone {
+
   0%,
   100% {
     transform: translateY(0px) rotate(0deg);
   }
+
   50% {
     transform: translateY(-20px) rotate(2deg);
   }

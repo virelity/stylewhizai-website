@@ -49,44 +49,44 @@
   margin-bottom: 40px;
 }
 
-.cta-main-btn {
+.coming-soon-badge {
+  display: inline-block;
   background: linear-gradient(135deg, #FF69B4, #FF1493);
   color: white;
-  padding: 18px 50px;
-  font-size: 20px;
-  font-weight: 700;
-  border-radius: 35px;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+  padding: 16px 40px;
+  font-size: 22px;
+  font-weight: 800;
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
 }
 
-.cta-main-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.5);
+.launch-date {
+  font-size: 20px !important;
+  color: #FF69B4 !important;
+  font-weight: 700 !important;
+  margin-bottom: 0 !important;
 }
 
 @media (max-width: 768px) {
   .cta-section {
     padding: 80px 20px;
   }
-  
+
   .cta-content {
     padding: 50px 30px;
   }
-  
+
   .cta-content h2 {
     font-size: 32px;
   }
-  
+
   .cta-content p {
     font-size: 18px;
   }
-  
+
   .cta-main-btn {
     padding: 16px 40px;
     font-size: 18px;

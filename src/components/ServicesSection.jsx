@@ -4,24 +4,24 @@ import './ServicesSection.css';
 const ServicesSection = () => {
   const services = [
     {
-      icon: <MessageSquare size={40} />,
-      title: 'AI Fashion Chatbot',
-      description: 'Get personalized fashion advice based on your preferences through our intelligent AI chatbot.'
+      icon: <User size={40} />,
+      title: 'Personalized Recommendations',
+      description: 'Get AI-driven outfit suggestions tailored to your unique style, body type, and preferences.'
     },
     {
       icon: <ScanFace size={40} />,
-      title: 'Face Scanning',
-      description: 'Advanced facial recognition to recommend styles that complement your unique features.'
+      title: 'Virtual Try-On',
+      description: 'Experience clothes virtually using advanced AR technology before you make a purchase.'
+    },
+    {
+      icon: <MessageSquare size={40} />,
+      title: 'Discovery Swipe',
+      description: 'Explore fashion effortlessly with our intuitive swipe interface—like a dating app for your wardrobe.'
     },
     {
       icon: <Ruler size={40} />,
-      title: 'Size Recommendation',
-      description: 'Accurate size suggestions based on your measurements and brand-specific sizing charts.'
-    },
-    {
-      icon: <User size={40} />,
-      title: 'Body Type Analysis',
-      description: 'Personalized style recommendations tailored to your body type and fashion preferences.'
+      title: 'Variety to Explore',
+      description: 'Discover a vast collection of brands and styles, curated to help you find your perfect look.'
     }
   ];
 
@@ -32,7 +32,7 @@ const ServicesSection = () => {
         <p className="section-subtitle">
           Cutting-edge features powered by AI and AR technology
         </p>
-        
+
         <div className="services-grid">
           {services.map((service, index) => (
             <div key={index} className="service-card">

@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import "./ShoppingExperience.css";
 import MobileAppCarousel from "./MobileAppCarousel";
 
-const ShoppingExperience = ({onDownloadClick}) => {
+const ShoppingExperience = ({ onDownloadClick }) => {
   return (
     <section id="virtual-tryon" className="shopping-section">
       <div className="shopping-container">
@@ -40,7 +40,7 @@ const ShoppingExperience = ({onDownloadClick}) => {
               <span>AI-powered style confidence</span>
             </div>
           </div>
-          <Button className="experience-btn" onClick={onDownloadClick}>Experience Smart Shopping</Button>
+          <Button className="experience-btn" onClick={onDownloadClick}>Coming Soon</Button>
         </div>
       </div>
     </section>

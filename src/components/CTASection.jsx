@@ -12,17 +12,10 @@ const CTASection = () => {
             Discover personalized AI styling, virtual AR try-ons, and smart
             wardrobe planning. Step into the next generation of fashion today.
           </p>
-          <Button
-            onClick={() => {
-              window.Calendly.initPopupWidget({
-                url: "https://calendly.com/omaima-rh/stylewhizai-demo",
-              });
-              return false;
-            }}
-            className="cta-main-btn"
-          >
-            Schedule a Demo <ArrowRight size={20} />
-          </Button>
+          <div className="coming-soon-badge">
+            Coming Soon on Play Store & App Store
+          </div>
+          <p className="launch-date">Launching February 5, 2026</p>
         </div>
       </div>
     </section>

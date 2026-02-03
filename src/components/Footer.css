@@ -74,9 +74,6 @@
   margin: 0;
 }
 
-.footer-column ul li {
-  /* margin-bottom: 8px; */
-}
 
 .footer-column ul li a {
   color: rgba(255, 255, 255, 0.7);
@@ -178,7 +175,13 @@
 
 .footer-links {
   display: flex;
-  gap: 30px;
+  gap: 15px;
+  align-items: center;
+}
+
+.separator {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
 }
 
 .footer-links a {
@@ -244,5 +247,4 @@
 }
 
 
-  /* CSS for portrait tablets only */
-  
+/* CSS for portrait tablets only */

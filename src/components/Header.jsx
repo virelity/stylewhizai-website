@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Smartphone, Loader2 } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -26,18 +27,14 @@ const Header = ({
   setShowRegisterModal,
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    country: "",
-  });
   const { toast } = useToast();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Check for existing token on component mount
   useEffect(() => {
@@ -49,80 +46,16 @@ const Header = ({
   }, []);
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
-
-  const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
-
-  const handleRegister = async () => {
-    setIsLoading(true);
-
-    try {
-      const response = await fetch(
-        "https://stylewhizai.net/api/users/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-
-        // Store token in localStorage
-        localStorage.setItem("stylewhizai_token", data.token);
-        setUserToken(data.token);
-        setIsAuthenticated(true);
-
-        toast({
-          title: "Registration Successful! 🎉",
-          description: "You can now download the StyleWhizAI app.",
-          variant: "default",
-        });
-
-        setIsModalOpen(false);
-        setFormData({ name: "", email: "", country: "" });
-      } else {
-        const errorData = await response.json();
-        toast({
-          title: "Registration Failed",
-          description: errorData.detail || "Please try again.",
-          variant: "destructive",
-        });
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+        setIsMenuOpen(false);
       }
-    } catch (error) {
-      toast({
-        title: "Network Error",
-        description:
-          "Unable to connect to server. Please check your internet connection.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
     }
   };
-
-  // const handleDownloadClick = () => {
-  //   if (isAuthenticated && userToken) {
-  //     // User is authenticated, proceed with download
-  //     downloadAPK();
-  //   } else {
-  //     // User not authenticated, show registration modal
-  //     setIsModalOpen(true);
-  //   }
-  // };
 
   const downloadAPK = async () => {
     setIsDownloading(true);
@@ -159,7 +92,7 @@ const Header = ({
         localStorage.removeItem("stylewhizai_token");
         setUserToken(null);
         setIsAuthenticated(false);
-        setIsModalOpen(true);
+        setShowRegisterModal(true);
       }
     } catch (error) {
       toast({
@@ -173,35 +106,13 @@ const Header = ({
     }
   };
 
-  const countries = [
-    "United States",
-    "Canada",
-    "United Kingdom",
-    "Australia",
-    "Germany",
-    "France",
-    "Spain",
-    "Italy",
-    "Netherlands",
-    "Sweden",
-    "Norway",
-    "Denmark",
-    "Finland",
-    "Japan",
-    "South Korea",
-    "Singapore",
-    "India",
-    "Brazil",
-    "Mexico",
-    "Argentina",
-    "Other",
-  ];
-
   return (
     <header className="main-header">
       <div className="header-container">
         <div className="logo">
-          <img src={Logo} className="logo" alt="StyleWhizAi Logo" />
+          <Link to="/">
+            <img src={Logo} className="logo" alt="StyleWhizAi Logo" />
+          </Link>
           {/* <h1>StyleWhizAI</h1> */}
         </div>
 
@@ -254,71 +165,21 @@ const Header = ({
             >
               <DialogContent className="registration-modal">
                 <DialogHeader>
-                  <DialogTitle>Get Early Access</DialogTitle>
+                  <DialogTitle>Coming Soon</DialogTitle>
                 </DialogHeader>
-                <div className="modal-form">
-                  <div className="form-group">
-                    <label htmlFor="name">Full Name</label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="Enter your full name"
-                      value={formData.name}
-                      onChange={(e) =>
-                        handleInputChange("name", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email Address</label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        handleInputChange("email", e.target.value)
-                      }
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="country">Country</label>
-                    <Select
-                      value={formData.country}
-                      onValueChange={(value) =>
-                        handleInputChange("country", value)
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your country" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {countries.map((country) => (
-                          <SelectItem key={country} value={country}>
-                            {country}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <div className="coming-soon-modal-content">
+                  <div className="coming-soon-icon">🚀</div>
+                  <p className="coming-soon-text">
+                    StyleWhiz AI is launching on <strong>February 5, 2026</strong>.
+                  </p>
+                  <p className="coming-soon-subtext">
+                    Get ready to experience the future of fashion on Play Store and App Store.
+                  </p>
                   <Button
-                    onClick={handleRegister}
-                    className="register-button"
-                    disabled={
-                      !formData.name ||
-                      !formData.email ||
-                      !formData.country ||
-                      isLoading
-                    }
+                    className="close-modal-btn"
+                    onClick={() => setShowRegisterModal(false)}
                   >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Registering...
-                      </>
-                    ) : (
-                      "Register for Early Access"
-                    )}
+                    Got it!
                   </Button>
                 </div>
               </DialogContent>
